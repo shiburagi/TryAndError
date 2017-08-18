@@ -1,0 +1,40 @@
+{
+  "answers": [{
+    "data": [
+      {
+        "currency": "EUR/JPY",
+        "rate": "122.593",
+        "timestamp": "1497524449141"
+      },
+      {
+        "currency": "EUR/CHF",
+        "rate": "1.08779",
+        "timestamp": "1497524449234"
+      },
+      {
+        "currency": "USD/CAD",
+        "rate": "1.32772",
+        "timestamp": "1497524449235"
+      },
+      {
+        "currency": "AUD/USD",
+        "rate": "0.75875",
+        "timestamp": "1497524449148"
+      },
+      {
+        "currency": "GBP/JPY",
+        "rate": "140.248",
+        "timestamp": "1497524449230"
+      }
+    ],
+    "metadata": {"count": 60},
+    "actions": [{
+      "type": "table",
+      "columns": {
+        "currency": "Valuta",
+        "rate": "Quota"
+      },
+      "count": -1
+    }]
+  }]
+}
