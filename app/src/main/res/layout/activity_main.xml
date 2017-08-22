@@ -26,9 +26,9 @@
             android:layout_width="wrap_content"
             android:layout_height="16dp" />
         <View
-            android:background="@color/colorGrey_300"
+            android:background="@color/colorGrey_400"
             android:layout_width="match_parent"
-            android:layout_height="1dp"/>
+            android:layout_height="2dp"/>
         <android.support.v4.widget.Space
             android:layout_width="wrap_content"
             android:layout_height="16dp" />
