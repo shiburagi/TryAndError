@@ -20,33 +20,47 @@ public class TextViewUtils {
         return instance;
     }
 
-    public void printIncrement(TextView textView, long endNumber, long millis) {
-        printIncrement(textView, 0, endNumber, millis);
+    public Thread printIncrement(TextView textView, long endNumber, long millis) {
+        return printIncrement(textView, 0, endNumber, millis);
     }
 
-    public void printIncrement(TextView textView, long startNumber, long endNumber, long millis) {
-        printIncrement(textView, "%d", startNumber, endNumber, millis);
+    public Thread printIncrement(TextView textView, long startNumber, long endNumber, long millis) {
+        return printIncrement(textView, "%d", startNumber, endNumber, millis);
     }
 
-    public void printIncrement(TextView textView, String format, long startNumber, long endNumber, long millis) {
-        printIncrement(textView, Locale.getDefault(), format, startNumber, endNumber, millis);
+    public Thread printIncrement(TextView textView, String format, long endNumber, long millis) {
+        return printIncrement(textView, Locale.getDefault(), format, endNumber, millis);
 
     }
 
-    public void printIncrement(final TextView textView, final Locale locale, final String format, final long startNumber, final long endNumber, final long millis) {
+    public Thread printIncrement(TextView textView, String format, long startNumber, long endNumber, long millis) {
+        return printIncrement(textView, Locale.getDefault(), format, startNumber, endNumber, millis);
+
+    }
+
+    public Thread printIncrement(TextView textView, Locale locale, String format, long endNumber, long millis) {
+        return printIncrement(textView, locale, format, 0, endNumber, millis);
+
+    }
+
+    public Thread printIncrement(final TextView textView, final Locale locale, final String format, final long startNumber, final long endNumber, final long millis) {
+        final Thread thread = printIncrementPostDelayed(textView, locale, format, startNumber, endNumber, millis);
         textView.post(new Runnable() {
             @Override
             public void run() {
-                printIncrementPostDelayed(textView, locale, format, startNumber, endNumber, millis);
+                thread.start();
             }
         });
 
+        return thread;
+
     }
 
-    private void printIncrementPostDelayed(final TextView textView, final Locale locale,
-                                           final String format, final long startNumber,
-                                           final long endNumber, final long millis) {
-        new Thread() {
+
+    private Thread printIncrementPostDelayed(final TextView textView, final Locale locale,
+                                             final String format, final long startNumber,
+                                             final long endNumber, final long millis) {
+        return new Thread() {
             @Override
             public void run() {
                 try {
@@ -59,23 +73,28 @@ public class TextViewUtils {
                     } else
                         increment = 1;
 
-                    textView.setText(getString(locale, format, counter));
+                    displayText(textView, locale, format, counter);
                     while (counter < endNumber) {
                         sleep((long) delayDuration);
                         counter += increment;
-                        final String displayText = getString(locale, format, counter);
-                        textView.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                textView.setText(displayText);
-                            }
-                        });
+                        displayText(textView, locale, format, counter);
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
-        }.start();
+        };
+    }
+
+    private void displayText(final TextView textView, Locale locale, String format, long counter) {
+
+        final String displayText = getString(locale, format, counter);
+        textView.post(new Runnable() {
+            @Override
+            public void run() {
+                textView.setText(displayText);
+            }
+        });
     }
 
     private String getString(Locale locale, String format, long counter) {

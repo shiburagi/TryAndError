@@ -9,7 +9,8 @@ import com.infideap.tryanderror.util.TextViewUtils;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView textView;
+    private TextView textView1;
+    private TextView textView2;
     private String TAG = MainActivity.class.getSimpleName();
 
     @Override
@@ -24,9 +25,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textView = (TextView) findViewById(R.id.textView);
+        textView1 = (TextView) findViewById(R.id.textView1);
+        textView2 = (TextView) findViewById(R.id.textView2);
 
-        TextViewUtils.getInstance().printIncrement(textView, 895, 2000);
+        TextViewUtils.getInstance().printIncrement(textView1, 895, 2000);
+        TextViewUtils.getInstance().printIncrement(textView2,"completed\n%d", 895, 2000);
 
     }
 
