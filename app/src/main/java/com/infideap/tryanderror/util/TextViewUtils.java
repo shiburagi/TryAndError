@@ -60,12 +60,23 @@ public class TextViewUtils {
     private Thread printIncrementPostDelayed(final TextView textView, final Locale locale,
                                              final String format, final long startNumber,
                                              final long endNumber, final long millis) {
+
         return new Thread() {
             @Override
             public void run() {
                 try {
-                    long counter = startNumber;
-                    double delayDuration = (double) millis / (double) (endNumber - startNumber);
+                    long start;
+                    long end;
+
+                    if (startNumber > endNumber) {
+                        start = endNumber;
+                        end = startNumber;
+                    } else {
+                        start = startNumber;
+                        end = endNumber;
+                    }
+                    long counter = start;
+                    double delayDuration = (double) millis / (double) (end - start);
                     long increment;
                     if (delayDuration < 1) {
                         increment = (long) Math.ceil(1f / delayDuration);
@@ -73,17 +84,21 @@ public class TextViewUtils {
                     } else
                         increment = 1;
 
-                    displayText(textView, locale, format, counter);
-                    while (counter < endNumber) {
+                    displayText(textView, locale, format,
+                            startNumber < endNumber ? counter : startNumber - (counter - start));
+                    while (counter < end) {
                         sleep((long) delayDuration);
                         counter += increment;
-                        displayText(textView, locale, format, counter);
+                        displayText(textView, locale, format,
+                                startNumber < endNumber ? counter : startNumber - (counter - start));
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
         };
+
+
     }
 
     private void displayText(final TextView textView, Locale locale, String format, long counter) {

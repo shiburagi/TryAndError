@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
         textView1 = (TextView) findViewById(R.id.textView1);
         textView2 = (TextView) findViewById(R.id.textView2);
 
-        TextViewUtils.getInstance().printIncrement(textView1, 895, 2000);
-        TextViewUtils.getInstance().printIncrement(textView2,"completed\n%d", 895, 2000);
+        TextViewUtils.getInstance().printIncrement(textView1, 895, -100, 2000);
+        TextViewUtils.getInstance().printIncrement(textView2, "completed\n%d", 895, 2000);
 
     }
 
