@@ -33,8 +33,13 @@ public class TextViewUtils {
 
     }
 
-    public void printIncrement(TextView textView, Locale locale, String format, long startNumber, long endNumber, long millis) {
-        printIncrementPostDelayed(textView, locale, format, startNumber, endNumber, millis);
+    public void printIncrement(final TextView textView, final Locale locale, final String format, final long startNumber, final long endNumber, final long millis) {
+        textView.post(new Runnable() {
+            @Override
+            public void run() {
+                printIncrementPostDelayed(textView, locale, format, startNumber, endNumber, millis);
+            }
+        });
 
     }
 

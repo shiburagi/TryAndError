@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         textView = (TextView) findViewById(R.id.textView);
 
-        TextViewUtils.getInstance().printIncrement(textView, 895, 500);
+        TextViewUtils.getInstance().printIncrement(textView, 895, 2000);
 
     }
 
